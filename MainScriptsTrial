@@ -1,0 +1,280 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUD-Dynamic-Entity", "CRUD-Dynamic-Entity\CRUD-Dynamic-Entity.csproj", "{06E79C5F-3024-400F-80D5-A1A493831CFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06E79C5F-3024-400F-80D5-A1A493831CFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E79C5F-3024-400F-80D5-A1A493831CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E79C5F-3024-400F-80D5-A1A493831CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E79C5F-3024-400F-80D5-A1A493831CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EF236BE-4A0E-4D8C-9949-44FC32A87F06}
+	EndGlobalSection
+EndGlobal
+ 95 changes: 95 additions & 0 deletions95  
+...a-service/C#/CRUD-Dynamic-Entity/CRUD-Dynamic-Entity/CRUD-Dynamic-Entity.csproj
+@@ -0,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06E79C5F-3024-400F-80D5-A1A493831CFE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PowerApps.Samples</RootNamespace>
+    <AssemblyName>CRUD-Dynamic-Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Crm.Sdk.Proxy, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.0.5\lib\net452\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms, Version=2.22.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.2.22.302111727\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.CoreAssemblies.9.0.0.5\lib\net452\Microsoft.Xrm.Sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Deployment, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Deployment.9.0.0.5\lib\net452\Microsoft.Xrm.Sdk.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Sdk.Workflow, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.Workflow.9.0.0.5\lib\net452\Microsoft.Xrm.Sdk.Workflow.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xrm.Tooling.Connector, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CrmSdk.XrmTooling.CoreAssembly.9.0.0.7\lib\net452\Microsoft.Xrm.Tooling.Connector.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Workflow.Activities" />
+    <Reference Include="System.Workflow.ComponentModel" />
+    <Reference Include="System.Workflow.Runtime" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SampleMethods.cs" />
+    <Compile Include="SampleProgram.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\App.config">
+      <Link>App.config</Link>
+    </None>
+    <None Include="..\..\packages.config">
+      <Link>packages.config</Link>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
+ 36 changes: 36 additions & 0 deletions36  
+common-data-service/C#/CRUD-Dynamic-Entity/CRUD-Dynamic-Entity/Properties/AssemblyInfo.cs
+@@ -0,0 +1,36 @@
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+// General Information about an assembly is controlled through the following
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+[assembly: AssemblyTitle("CRUD-Dynamic-Entity")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CRUD-Dynamic-Entity")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+// Setting ComVisible to false makes the types in this assembly not visible
+// to COM components.  If you need to access a type in this assembly from
+// COM, set the ComVisible attribute to true on that type.
+[assembly: ComVisible(false)]
+
+// The following GUID is for the ID of the typelib if this project is exposed to COM
+[assembly: Guid("06e79c5f-3024-400f-80d5-a1a493831cfe")]
+
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Build and Revision Numbers
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+ 16 changes: 16 additions & 0 deletions16  
+common-data-service/C#/CRUD-Dynamic-Entity/CRUD-Dynamic-Entity/SampleMethods.cs
+@@ -0,0 +1,16 @@
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
+using System;
+
+namespace PowerApps.Samples
+{
+    partial class SampleProgram
+    {
+
+     public static Guid CreateEntity(IOrganizationService service, Entity entity) {
+            CreateRequest req = new CreateRequest() { Target = entity };
+            CreateResponse resp = (CreateResponse)service.Execute(req);
+            return resp.id;
+        }
+    }
+}
+ 86 changes: 86 additions & 0 deletions86  
+common-data-service/C#/CRUD-Dynamic-Entity/CRUD-Dynamic-Entity/SampleProgram.cs
+@@ -0,0 +1,86 @@
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Tooling.Connector;
+using System;
+using System.Configuration;
+using System.ServiceModel;
+
+namespace PowerApps.Samples
+{
+    partial class SampleProgram
+    {
+        static void Main(string[] args)
+        {
+            try {
+                CrmServiceClient csc = new CrmServiceClient(ConfigurationManager.ConnectionStrings["Connect"].ConnectionString);
+                IOrganizationService service = csc.OrganizationServiceProxy;
+
+                //Add code here
+                //////////////////////////////////////////////
+                Entity account = new Entity("account");
+                account["name"] = "Test Account";
+
+                //User service methods directly:
+                // Guid accountid = service.Create(account);
+
+                //Use method defined in SampleMethods.cs
+                Guid accountid = CreateEntity(service, account);
+
+                //////////////////////////////////////////////
+
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                Console.WriteLine("The application terminated with an error.");
+                Console.WriteLine("Timestamp: {0}", ex.Detail.Timestamp);
+                Console.WriteLine("Code: {0}", ex.Detail.ErrorCode);
+                Console.WriteLine("Message: {0}", ex.Detail.Message);
+                Console.WriteLine("Plugin Trace: {0}", ex.Detail.TraceText);
+                Console.WriteLine("Inner Fault: {0}",
+                    null == ex.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
+            }
+            catch (TimeoutException ex)
+            {
+                Console.WriteLine("The application terminated with an error.");
+                Console.WriteLine("Message: {0}", ex.Message);
+                Console.WriteLine("Stack Trace: {0}", ex.StackTrace);
+                Console.WriteLine("Inner Fault: {0}",
+                    null == ex.InnerException.Message ? "No Inner Fault" : ex.InnerException.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("The application terminated with an error.");
+                Console.WriteLine(ex.Message);
+
+                // Display the details of the inner exception.
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+
+                    FaultException<OrganizationServiceFault> fe = ex.InnerException
+                        as FaultException<OrganizationServiceFault>;
+                    if (fe != null)
+                    {
+                        Console.WriteLine("Timestamp: {0}", fe.Detail.Timestamp);
+                        Console.WriteLine("Code: {0}", fe.Detail.ErrorCode);
+                        Console.WriteLine("Message: {0}", fe.Detail.Message);
+                        Console.WriteLine("Plugin Trace: {0}", fe.Detail.TraceText);
+                        Console.WriteLine("Inner Fault: {0}",
+                            null == fe.Detail.InnerFault ? "No Inner Fault" : "Has Inner Fault");
+                    }
+                }
+            }
+            // Additional exceptions to catch: SecurityTokenValidationException, ExpiredSecurityTokenException,
+            // SecurityAccessDeniedException, MessageSecurityException, and SecurityNegotiationException.
+
+            finally
+            {
+
+                Console.WriteLine("Press <Enter> to exit.");
+                Console.ReadLine();
+            }
+
+
+
+        }
+    }
+}
+ 8 changes: 8 additions & 0 deletions8  
+common-data-service/C#/packages.config
+@@ -0,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="Microsoft.CrmSdk.CoreAssemblies" version="9.0.0.5" targetFramework="net461" />
+  <package id="Microsoft.CrmSdk.Deployment" version="9.0.0.5" targetFramework="net461" />
+  <package id="Microsoft.CrmSdk.Workflow" version="9.0.0.5" targetFramework="net461" />
+  <package id="Microsoft.CrmSdk.XrmTooling.CoreAssembly" version="9.0.0.7" targetFramework="net461" />
+  <package id="Microsoft.IdentityModel.Clients.ActiveDirectory" version="2.22.302111727" targetFramework="net461" />
+</packages>
